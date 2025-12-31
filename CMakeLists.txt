@@ -12,6 +12,10 @@ add_executable(SortingVisualizer main.cpp
         include/SortingMethod.h
         src/sortingMethods/BubbleSort.cpp
         include/sortingMethods/BubbleSort.h
+        src/drawingMethods/ColumnsDrawingMethod.cpp
+        include/drawingMethods/ColumnsDrawingMethod.h
+        src/DrawingMethod.cpp
+        include/DrawingMethod.h
 )
 
 find_package(raylib CONFIG REQUIRED)

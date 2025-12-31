@@ -11,9 +11,12 @@ public:
 
 	void draw(const raylib::Window &window) override;
 
+	void shuffle() override;
+
+	void initSoundSamples();
+
 private:
-	int dataSize;
+	size_t dataSize;
 	int bubble_i = 0;
 	int bubble_j = 0;
-	int step = 0;
 };
