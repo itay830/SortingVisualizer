@@ -1,9 +1,10 @@
 #include "../include/SortingVisualizer.h"
 
+#include <random>
 #include <iostream>
 
-SortingVisualizer::SortingVisualizer()
-	: sortingMethod(nullptr), drawingMethod(nullptr) {
+SortingVisualizer::SortingVisualizer(const std::vector<int> &arr)
+	: sortingMethod(nullptr), drawingMethod(nullptr), arr(arr) {
 }
 
 void SortingVisualizer::setSortingMethod(SortingMethod *sorting_method) {
@@ -30,16 +31,17 @@ void SortingVisualizer::decreaseSpeed() {
 	setSpeed(speed-1);
 }
 
-void SortingVisualizer::nextStep() const {
-	sortingMethod->next(speed);
+void SortingVisualizer::nextStep() {
+	sortingMethod->next(arr, speed);
 }
 
-void SortingVisualizer::draw(const raylib::Window &window) {
-	drawingMethod->draw(window);
+void SortingVisualizer::draw(const raylib::Window &window) const {
+	drawingMethod->draw(arr, window);
 }
 
-void SortingVisualizer::shuffle() const {
-	sortingMethod->shuffle();
+void SortingVisualizer::shuffle() {
+	sortingMethod->reset();
+	std::ranges::shuffle(arr, std::default_random_engine());
 }
 
 SortingVisualizer::~SortingVisualizer() {

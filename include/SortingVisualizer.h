@@ -4,7 +4,7 @@
 
 class SortingVisualizer {
 public:
-	explicit SortingVisualizer();
+	explicit SortingVisualizer(const std::vector<int> &arr);
 
 	~SortingVisualizer();
 
@@ -12,7 +12,7 @@ public:
 
 	void setDrawingMethod(DrawingMethod *drawing_method);
 
-	void draw(const raylib::Window &window);
+	void draw(const raylib::Window &window) const;
 
 	void setSpeed(int newSpeed);
 
@@ -20,10 +20,10 @@ public:
 
 	void decreaseSpeed();
 
-	void nextStep() const;
+	void nextStep();
 
 
-	void shuffle() const;
+	void shuffle();
 
 	SortingMethod *sortingMethod;
 	DrawingMethod *drawingMethod;

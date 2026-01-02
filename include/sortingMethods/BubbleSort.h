@@ -7,20 +7,17 @@ class BubbleSort : public SortingMethod {
 public:
 	static void sort(std::vector<int> &arr);
 
-	explicit BubbleSort(const std::vector<int> &arr);
+	explicit BubbleSort();
 
 	~BubbleSort() override;
 
-	int next(int steps) override;
+	void reset() override;
 
-	void draw(const raylib::Window &window) override;
-
-	void shuffle() override;
+	int next(std::vector<int> &arr, const int steps) override;
 
 	void initSoundSamples();
 
 private:
-	size_t dataSize;
 	int bubble_i = 0;
 	int bubble_j = 0;
 

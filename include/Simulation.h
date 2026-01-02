@@ -18,14 +18,11 @@ public:
 
 	void stop();
 
-	void logic();
-
-
 	void draw();
 
 private:
 	raylib::Window window;
-	SortingVisualizer visualizer = SortingVisualizer();
+	SortingVisualizer visualizer = SortingVisualizer({});
 
 	void mainLoop();
 };

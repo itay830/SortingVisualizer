@@ -22,9 +22,9 @@ Simulation::Simulation(const int width, const int height, const std::string &tit
 		arr.push_back(i);
 	}
 
-	visualizer = SortingVisualizer();
-	visualizer.setDrawingMethod(new ColumnsDrawingMethod(arr));
-	visualizer.setSortingMethod(new BubbleSort(arr));
+	visualizer = SortingVisualizer(arr);
+	visualizer.setDrawingMethod(new ColumnsDrawingMethod());
+	visualizer.setSortingMethod(new BubbleSort());
 	visualizer.setSpeed(1);
 }
 
@@ -33,9 +33,6 @@ void Simulation::mainLoop() {
 		onInput();
 		draw();
 	}
-}
-
-void Simulation::logic() {
 }
 
 void Simulation::onInput() {

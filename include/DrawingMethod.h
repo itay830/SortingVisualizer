@@ -4,11 +4,8 @@
 
 class DrawingMethod {
 public:
-	explicit DrawingMethod(const std::vector<int> &arr);
+	explicit DrawingMethod();
 
 	virtual ~DrawingMethod() = default;
-	virtual void draw(const raylib::Window &window) = 0;
-
-	std::vector<int> arr;
-
+	virtual void draw(const std::vector<int> &arr, const raylib::Window &window) = 0;
 };

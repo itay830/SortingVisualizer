@@ -1,11 +1,10 @@
 #include "../../include/drawingMethods/ColumnsDrawingMethod.h"
 
-ColumnsDrawingMethod::ColumnsDrawingMethod(const std::vector<int> &arr)
-	: DrawingMethod(arr),
-	  dataSize(arr.size()) {
+ColumnsDrawingMethod::ColumnsDrawingMethod() {
 }
 
-void ColumnsDrawingMethod::draw(const raylib::Window &window) {
+void ColumnsDrawingMethod::draw(const std::vector<int> &arr, const raylib::Window &window) {
+	const int dataSize = static_cast<int>(arr.size());
 	const auto fDataSize = static_cast<float>(dataSize);
 	const auto windowHeight = static_cast<float>(window.GetHeight());
 	const auto colWidth = static_cast<float>(window.GetWidth()) / fDataSize;

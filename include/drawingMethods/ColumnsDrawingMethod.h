@@ -5,10 +5,7 @@
 
 class ColumnsDrawingMethod : public DrawingMethod {
 public:
-	explicit ColumnsDrawingMethod(const std::vector<int> &arr);
-
-	int dataSize;
-
-	void draw(const raylib::Window &window) override;
+	explicit ColumnsDrawingMethod();
+	void draw(const std::vector<int> &arr, const raylib::Window &window) override;
 
 };
