@@ -2,7 +2,7 @@
 #include <vector>
 #include "raylib.h"
 
-inline Sound getSineSound(float hz, float dur) {
+inline Sound getSineSound(const float hz, const float dur) {
 	constexpr int sampleRate = 44100;
 	const int frameCount = static_cast<int>(sampleRate * dur);
 	std::vector<short> samples(frameCount);

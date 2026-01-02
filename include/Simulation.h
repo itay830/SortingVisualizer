@@ -14,19 +14,18 @@ public:
 
 	void run();
 
+	void onInput();
 
 	void stop();
 
-private:
-	raylib::Window window;
-	raylib::AudioDevice audioDevice;
-	SortingVisualizer visualizer = SortingVisualizer(nullptr);
-
-	void mainLoop();
-
 	void logic();
 
-	void onInput() const;
 
 	void draw();
+
+private:
+	raylib::Window window;
+	SortingVisualizer visualizer = SortingVisualizer();
+
+	void mainLoop();
 };

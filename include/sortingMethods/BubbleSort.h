@@ -11,7 +11,7 @@ public:
 
 	~BubbleSort() override;
 
-	void nextStep() override;
+	int next(int steps) override;
 
 	void draw(const raylib::Window &window) override;
 
@@ -23,6 +23,8 @@ private:
 	size_t dataSize;
 	int bubble_i = 0;
 	int bubble_j = 0;
-	int soundSpeed = 2000;
+
+	int soundSpeed = 600;
 	std::vector<Sound> sounds;
 };
+
