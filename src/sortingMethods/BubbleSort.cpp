@@ -1,5 +1,6 @@
 #include "../../include/sortingMethods/BubbleSort.h"
 #include <random>
+#include "../../include/SoundUtils.h"
 
 void BubbleSort::sort(std::vector<int> &arr) {
 	for (int i = 0; i < arr.size() - 1; i++) {
@@ -22,8 +23,12 @@ void BubbleSort::nextStep() {
 			return;
 		}
 		step++;
+		if (step % soundSpeed == 0) {
+			PlaySound(sounds[bubble_j]);
+		}
 		if (arr[bubble_j] > arr[bubble_j + 1]) {
 			std::swap(arr[bubble_j], arr[bubble_j + 1]);
+
 		}
 		bubble_j++;
 		if (bubble_j >= arr.size() - bubble_i - 1) {
@@ -35,7 +40,15 @@ void BubbleSort::nextStep() {
 
 BubbleSort::BubbleSort(const std::vector<int> &arr)
 	: SortingMethod(arr),
-	  dataSize(arr.size()) {
+	  dataSize(arr.size()),
+	  sounds(dataSize) {
+	initSoundSamples();
+}
+
+BubbleSort::~BubbleSort() {
+	for (int i = 0; i < dataSize; i++) {
+		UnloadSound(sounds[i]);
+	}
 }
 
 void BubbleSort::draw(const raylib::Window &window) {
@@ -48,9 +61,9 @@ void BubbleSort::draw(const raylib::Window &window) {
 		              static_cast<int>(windowHeight * (1 - static_cast<float>(arr[i]) / fDataSize)),
 		              static_cast<int>(colWidth + 1),
 		              static_cast<int>(windowHeight),
-		              Color(125,
-		                    static_cast<unsigned char>(180.0f * colorRatio),
-		                    static_cast<unsigned char>(90 * colorRatio),
+		              Color(255,
+		                    static_cast<unsigned char>(255.0f * (1 - colorRatio)),
+		                    static_cast<unsigned char>(255),
 		                    255));
 	}
 }
@@ -64,6 +77,8 @@ void BubbleSort::shuffle() {
 
 void BubbleSort::initSoundSamples() {
 	for (int i = 0; i < dataSize; i++) {
-		// TODO: Prepare sound samples
+		const float hz = 150.f + static_cast<float>(i) / static_cast<float>(dataSize) * 800.0f;
+		sounds[i] = getSineSound(hz, 0.02f);
+		SetSoundVolume(sounds[i], .1f);
 	}
 }

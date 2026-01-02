@@ -6,4 +6,6 @@ public:
 	explicit SortingVisualizer(SortingMethod *sortingMethod);
 
 	SortingMethod *sortingMethod;
+
+	~SortingVisualizer();
 };

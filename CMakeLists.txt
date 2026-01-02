@@ -16,6 +16,7 @@ add_executable(SortingVisualizer main.cpp
         include/drawingMethods/ColumnsDrawingMethod.h
         src/DrawingMethod.cpp
         include/DrawingMethod.h
+        include/SoundUtils.h
 )
 
 find_package(raylib CONFIG REQUIRED)
