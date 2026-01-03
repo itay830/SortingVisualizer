@@ -1,6 +1,7 @@
 #pragma once
 #include "DrawingMethod.h"
 #include "SortingMethod.h"
+#include "SoundUtils.h"
 
 class SortingVisualizer {
 public:
@@ -16,12 +17,13 @@ public:
 
 	void setSpeed(int newSpeed);
 
+	void sort();
+
 	void increaseSpeed();
 
 	void decreaseSpeed();
 
 	void nextStep();
-
 
 	void shuffle();
 
@@ -29,6 +31,7 @@ public:
 	DrawingMethod *drawingMethod;
 
 private:
+	// Sound shuffleSound;
 	int speed = 1;
 	std::vector<int> arr;
 };

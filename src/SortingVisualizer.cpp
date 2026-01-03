@@ -1,10 +1,14 @@
 #include "../include/SortingVisualizer.h"
 
 #include <random>
-#include <iostream>
+
+#include "../include/sortingMethods/BubbleSort.h"
 
 SortingVisualizer::SortingVisualizer(const std::vector<int> &arr)
-	: sortingMethod(nullptr), drawingMethod(nullptr), arr(arr) {
+	: sortingMethod(nullptr),
+	  drawingMethod(nullptr),
+	  // shuffleSound(getSineSound(200.0f + (0.75f) * 800.0f, 0.1f)),
+	  arr(arr) {
 }
 
 void SortingVisualizer::setSortingMethod(SortingMethod *sorting_method) {
@@ -23,12 +27,16 @@ void SortingVisualizer::setSpeed(const int newSpeed) {
 	this->speed = newSpeed;
 }
 
+void SortingVisualizer::sort() {
+	BubbleSort::sort(arr);
+}
+
 void SortingVisualizer::increaseSpeed() {
-	setSpeed(speed+1);
+	setSpeed(speed + 1);
 }
 
 void SortingVisualizer::decreaseSpeed() {
-	setSpeed(speed-1);
+	setSpeed(speed - 1);
 }
 
 void SortingVisualizer::nextStep() {
@@ -42,9 +50,11 @@ void SortingVisualizer::draw(const raylib::Window &window) const {
 void SortingVisualizer::shuffle() {
 	sortingMethod->reset();
 	std::ranges::shuffle(arr, std::default_random_engine());
+	// PlaySound(shuffleSound);
 }
 
 SortingVisualizer::~SortingVisualizer() {
+	// UnloadSound(shuffleSound);
 	delete sortingMethod;
 	delete drawingMethod;
 }

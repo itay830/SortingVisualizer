@@ -23,7 +23,6 @@ int BubbleSort::next(std::vector<int> &arr, const int steps) {
 		if (bubble_i >= arr.size() - 1) {
 			return -1;
 		}
-		step++;
 		if (arr[bubble_j] > arr[bubble_j + 1]) {
 			std::swap(arr[bubble_j], arr[bubble_j + 1]);
 		}
@@ -37,19 +36,15 @@ int BubbleSort::next(std::vector<int> &arr, const int steps) {
 }
 
 BubbleSort::BubbleSort() {
-	// initSoundSamples();
 }
 
 BubbleSort::~BubbleSort() {
-	// for (int i = 0; i < dataSize; i++) {
-		// UnloadSound(sounds[i]);
-	// }
+
 }
 
 void BubbleSort::reset() {
 	this->bubble_i = 0;
 	this->bubble_j = 0;
-	this->step = 0;
 }
 
 void BubbleSort::initSoundSamples() {

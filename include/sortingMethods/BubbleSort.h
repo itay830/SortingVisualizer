@@ -20,8 +20,5 @@ public:
 private:
 	int bubble_i = 0;
 	int bubble_j = 0;
-
-	int soundSpeed = 600;
-	std::vector<Sound> sounds;
 };
 

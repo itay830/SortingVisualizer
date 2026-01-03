@@ -17,6 +17,12 @@ add_executable(SortingVisualizer main.cpp
         src/DrawingMethod.cpp
         include/DrawingMethod.h
         include/SoundUtils.h
+        src/MixerMethod.cpp
+        include/MixerMethod.h
+        src/mixerMethods/HyperbolicMixer.cpp
+        include/mixerMethods/HyperbolicMixer.h
+        src/drawingMethods/DisperityLoop.cpp
+        include/drawingMethods/DisparityLoop.h
 )
 
 find_package(raylib CONFIG REQUIRED)

@@ -3,8 +3,6 @@
 
 class SortingMethod {
 public:
-	int step = 0;
-
 	explicit SortingMethod();
 
 	virtual ~SortingMethod() = default;

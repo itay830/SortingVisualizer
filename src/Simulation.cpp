@@ -6,26 +6,26 @@
 
 #include "../include/SoundUtils.h"
 #include "../include/drawingMethods/ColumnsDrawingMethod.h"
+#include "../include/drawingMethods/DisparityLoop.h"
 #include "../include/sortingMethods/BubbleSort.h"
 
 Simulation::Simulation(const int width, const int height, const std::string &title)
 	: window(width, height, title) {
 	window.SetIcon(raylib::Image("../resources/simulationVisualizerIcon.png"));
-	window.SetFullscreen(true);
 	window.SetTargetFPS(1500);
 
 	InitAudioDevice();
 	SetMasterVolume(1.f);
 
 	std::vector<int> arr{};
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 5000; i++) {
 		arr.push_back(i);
 	}
 
 	visualizer = SortingVisualizer(arr);
-	visualizer.setDrawingMethod(new ColumnsDrawingMethod());
+	visualizer.setDrawingMethod(new DisparityLoop());
 	visualizer.setSortingMethod(new BubbleSort());
-	visualizer.setSpeed(1);
+	visualizer.setSpeed(4000);
 }
 
 void Simulation::mainLoop() {
@@ -41,7 +41,6 @@ void Simulation::onInput() {
 	}
 	if (IsKeyPressed(KEY_R)) {
 		visualizer.shuffle();
-		PlaySound(getSineSound(200.0f + (0.75f) * 800.0f, 0.1f));
 	}
 	if (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT)) {
 		visualizer.increaseSpeed();
@@ -49,13 +48,19 @@ void Simulation::onInput() {
 	if (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT)) {
 		visualizer.decreaseSpeed();
 	}
+	if (IsKeyPressed(KEY_S)) {
+		visualizer.sort();
+	}
+	if (IsKeyPressed(KEY_F11)) {
+		// TODO: FIX
+		// ToggleFullscreen();
+	}
 }
 
 void Simulation::draw() {
 	window.BeginDrawing();
 	window.ClearBackground(BLACK);
 	DrawFPS(10, 10);
-	// visualizer.sortingMethod->draw(window);
 	visualizer.draw(window);
 	window.EndDrawing();
 }

@@ -1,7 +1,8 @@
 #include "include/Simulation.h"
 
 int main() {
-	Simulation simulation{0, 0, "Sorting Visualizer"};
+	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+	Simulation simulation{800, 800, "Sorting Visualizer"};
 	ChangeDirectory(GetWorkingDirectory());
 	simulation.run();
 	return 0;
