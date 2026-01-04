@@ -5,7 +5,7 @@ void DisparityLoop::draw(const std::vector<int> &arr, const raylib::Window &wind
 	const auto width = static_cast<float>(window.GetWidth());
 	const auto height = static_cast<float>(window.GetHeight());
 	const Vector2 center(width / 2, height / 2);
-	const float radius = 0.9f * height / 2;
+	const float radius = 0.98f * std::min(height, width) / 2;
 	const int dataSize = static_cast<int>(arr.size());
 	const auto fDataSize = static_cast<float>(dataSize);
 	for (int i = 0; i < dataSize; i++) {

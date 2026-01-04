@@ -1,5 +1,6 @@
 #pragma once
 #include "DrawingMethod.h"
+#include "MixerMethod.h"
 #include "SortingMethod.h"
 #include "SoundUtils.h"
 
@@ -12,6 +13,8 @@ public:
 	void setSortingMethod(SortingMethod *sorting_method);
 
 	void setDrawingMethod(DrawingMethod *drawing_method);
+
+	void setMixerMethod(MixerMethod *mixer_method);
 
 	void draw(const raylib::Window &window) const;
 
@@ -35,9 +38,9 @@ public:
 
 	SortingMethod *sortingMethod;
 	DrawingMethod *drawingMethod;
+	MixerMethod *mixerMethod;
 
 private:
-	// Sound shuffleSound;
-	int speed = 1;
 	std::vector<int> arr;
+	int speed = 1;
 };

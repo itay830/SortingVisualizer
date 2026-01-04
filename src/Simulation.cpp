@@ -7,6 +7,7 @@
 #include "../include/SoundUtils.h"
 #include "../include/drawingMethods/ColumnsDrawingMethod.h"
 #include "../include/drawingMethods/DisparityLoop.h"
+#include "../include/mixerMethods/HyperbolicMixer.h"
 #include "../include/sortingMethods/BubbleSort.h"
 
 Simulation::Simulation(const int width, const int height, const std::string &title)
@@ -18,14 +19,15 @@ Simulation::Simulation(const int width, const int height, const std::string &tit
 	SetMasterVolume(1.f);
 
 	std::vector<int> arr{};
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 100; i++) {
 		arr.push_back(i);
 	}
 
 	visualizer = SortingVisualizer(arr);
-	visualizer.setDrawingMethod(new DisparityLoop());
 	visualizer.setSortingMethod(new BubbleSort());
-	visualizer.setSpeed(1000);
+	visualizer.setDrawingMethod(new ColumnsDrawingMethod());
+	visualizer.setMixerMethod(new HyperbolicMixer());
+	visualizer.setSpeed(300);
 }
 
 void Simulation::mainLoop() {

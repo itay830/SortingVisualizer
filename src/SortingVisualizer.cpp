@@ -5,7 +5,7 @@
 SortingVisualizer::SortingVisualizer(const std::vector<int> &arr)
 	: sortingMethod(nullptr),
 	  drawingMethod(nullptr),
-	  // shuffleSound(getSineSound(200.0f + (0.75f) * 800.0f, 0.1f)),
+	  mixerMethod(nullptr),
 	  arr(arr) {
 }
 
@@ -15,6 +15,11 @@ void SortingVisualizer::setSortingMethod(SortingMethod *sorting_method) {
 
 void SortingVisualizer::setDrawingMethod(DrawingMethod *drawing_method) {
 	this->drawingMethod = drawing_method;
+}
+
+void SortingVisualizer::setMixerMethod(MixerMethod *mixer_method) {
+	mixerMethod = mixer_method;
+	mixerMethod->initSounds(arr);
 }
 
 void SortingVisualizer::setSpeed(const int newSpeed) {
@@ -48,7 +53,7 @@ void SortingVisualizer::draw(const raylib::Window &window) const {
 }
 
 void SortingVisualizer::nextSteps() {
-	sortingMethod->next(arr, speed);
+	mixerMethod->playSound(arr, sortingMethod->next(arr, speed));
 }
 
 void SortingVisualizer::nextSteps(const int steps) {
@@ -70,7 +75,7 @@ void SortingVisualizer::shuffle() {
 }
 
 SortingVisualizer::~SortingVisualizer() {
-	// UnloadSound(shuffleSound);
+	delete mixerMethod;
 	delete sortingMethod;
 	delete drawingMethod;
 }

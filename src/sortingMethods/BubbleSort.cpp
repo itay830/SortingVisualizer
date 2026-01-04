@@ -17,15 +17,15 @@ void BubbleSort::sort(std::vector<int> &arr) {
 	}
 }
 
+
 int BubbleSort::next(std::vector<int> &arr, const int steps) {
 	const int dataSize = static_cast<int>(arr.size());
 	int stepsCounter = 0;
-	while (stepsCounter < steps) {
-		if (bubble_i >= arr.size() - 1) {
-			return -1;
-		}
+	int lastSwappedIndex = -1;
+	while (stepsCounter < steps && bubble_i < arr.size() - 1) {
 		if (arr[bubble_j] > arr[bubble_j + 1]) {
 			stepsCounter++;
+			lastSwappedIndex = bubble_j;
 			std::swap(arr[bubble_j], arr[bubble_j + 1]);
 		}
 		bubble_j++;
@@ -34,14 +34,9 @@ int BubbleSort::next(std::vector<int> &arr, const int steps) {
 			bubble_i++;
 		}
 	}
-	return -1;
+	return lastSwappedIndex;
 }
 
-BubbleSort::BubbleSort() {
-}
-
-BubbleSort::~BubbleSort() {
-}
 
 void BubbleSort::reset() {
 	this->bubble_i = 0;
@@ -49,11 +44,4 @@ void BubbleSort::reset() {
 }
 
 void BubbleSort::initSoundSamples() {
-	// for (int i = 1; i < dataSize; i++) {
-	// 	const float ratio = static_cast<float>(i) / dataSize;
-	// 	// const float hz = ratio * 5000.0f;
-	// 	const float hz = 10000.f * (2.f * static_cast<float>(i) / static_cast<float>(i + dataSize));
-	// 	sounds[i] = getSineSound(hz, 0.02f);
-	// 	SetSoundVolume(sounds[i], .1f);
-	// }
 }
