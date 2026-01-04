@@ -18,14 +18,14 @@ Simulation::Simulation(const int width, const int height, const std::string &tit
 	SetMasterVolume(1.f);
 
 	std::vector<int> arr{};
-	for (int i = 0; i < 5000; i++) {
+	for (int i = 0; i < 1000; i++) {
 		arr.push_back(i);
 	}
 
 	visualizer = SortingVisualizer(arr);
 	visualizer.setDrawingMethod(new DisparityLoop());
 	visualizer.setSortingMethod(new BubbleSort());
-	visualizer.setSpeed(4000);
+	visualizer.setSpeed(1000);
 }
 
 void Simulation::mainLoop() {
@@ -37,19 +37,28 @@ void Simulation::mainLoop() {
 
 void Simulation::onInput() {
 	if (IsKeyDown(KEY_SPACE)) {
-		visualizer.nextStep();
+		visualizer.nextSteps();
 	}
 	if (IsKeyPressed(KEY_R)) {
 		visualizer.shuffle();
 	}
-	if (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT)) {
-		visualizer.increaseSpeed();
-	}
-	if (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT)) {
-		visualizer.decreaseSpeed();
+
+
+	if (IsKeyPressed(KEY_UP)) {
+		visualizer.nextStep();
 	}
 	if (IsKeyPressed(KEY_S)) {
 		visualizer.sort();
+	}
+	if (IsKeyDown(KEY_LEFT_SHIFT) && IsKeyPressed(KEY_RIGHT)) {
+		visualizer.translateSpeed(100);
+	} else if (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT)) {
+		visualizer.increaseSpeed();
+	}
+	if (IsKeyDown(KEY_LEFT_SHIFT) && IsKeyPressed(KEY_LEFT)) {
+		visualizer.translateSpeed(-100);
+	} else if (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT)) {
+		visualizer.decreaseSpeed();
 	}
 	if (IsKeyPressed(KEY_F11)) {
 		// TODO: FIX

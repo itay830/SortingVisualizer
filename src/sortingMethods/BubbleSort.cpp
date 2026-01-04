@@ -18,12 +18,14 @@ void BubbleSort::sort(std::vector<int> &arr) {
 }
 
 int BubbleSort::next(std::vector<int> &arr, const int steps) {
-	const int dataSize = arr.size();
-	for (int i = 0; i < steps; i++) {
+	const int dataSize = static_cast<int>(arr.size());
+	int stepsCounter = 0;
+	while (stepsCounter < steps) {
 		if (bubble_i >= arr.size() - 1) {
 			return -1;
 		}
 		if (arr[bubble_j] > arr[bubble_j + 1]) {
+			stepsCounter++;
 			std::swap(arr[bubble_j], arr[bubble_j + 1]);
 		}
 		bubble_j++;
@@ -39,7 +41,6 @@ BubbleSort::BubbleSort() {
 }
 
 BubbleSort::~BubbleSort() {
-
 }
 
 void BubbleSort::reset() {

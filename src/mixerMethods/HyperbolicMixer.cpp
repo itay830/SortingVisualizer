@@ -1,7 +1,3 @@
-//
-// Created by Bekinski on 03/01/2026.
-//
-
 #include "../../include/mixerMethods/HyperbolicMixer.h"
 
 HyperbolicMixer::~HyperbolicMixer() {
@@ -9,6 +5,8 @@ HyperbolicMixer::~HyperbolicMixer() {
 		UnloadSound(sound);
 	}
 }
+
+
 
 void HyperbolicMixer::playSound() {
 }

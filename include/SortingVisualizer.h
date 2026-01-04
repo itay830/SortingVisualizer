@@ -23,6 +23,12 @@ public:
 
 	void decreaseSpeed();
 
+	void translateSpeed(int translation);
+
+	void nextSteps();
+
+	void nextSteps(int steps);
+
 	void nextStep();
 
 	void shuffle();

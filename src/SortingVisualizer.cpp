@@ -1,8 +1,6 @@
 #include "../include/SortingVisualizer.h"
-
-#include <random>
-
 #include "../include/sortingMethods/BubbleSort.h"
+#include <random>
 
 SortingVisualizer::SortingVisualizer(const std::vector<int> &arr)
 	: sortingMethod(nullptr),
@@ -39,17 +37,35 @@ void SortingVisualizer::decreaseSpeed() {
 	setSpeed(speed - 1);
 }
 
-void SortingVisualizer::nextStep() {
-	sortingMethod->next(arr, speed);
+void SortingVisualizer::translateSpeed(const int translation) {
+	setSpeed(speed + translation);
 }
 
 void SortingVisualizer::draw(const raylib::Window &window) const {
+	DrawText(("Speed: " + std::to_string(speed)).c_str(), 10, 40, 25, WHITE);
+	DrawText(("Step: " + std::to_string(0)).c_str(), 10, 70, 25, WHITE);
 	drawingMethod->draw(arr, window);
+}
+
+void SortingVisualizer::nextSteps() {
+	sortingMethod->next(arr, speed);
+}
+
+void SortingVisualizer::nextSteps(const int steps) {
+	sortingMethod->next(arr, steps);
+}
+
+void SortingVisualizer::nextStep() {
+	sortingMethod->next(arr, 1);
 }
 
 void SortingVisualizer::shuffle() {
 	sortingMethod->reset();
-	std::ranges::shuffle(arr, std::default_random_engine());
+	std::random_device rd;
+	std::mt19937 g(rd());
+	std::ranges::shuffle(arr, g);
+
+	// std::ranges::shuffle(arr, std::default_random_engine());
 	// PlaySound(shuffleSound);
 }
 
