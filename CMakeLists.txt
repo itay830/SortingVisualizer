@@ -23,6 +23,8 @@ add_executable(SortingVisualizer main.cpp
         include/mixerMethods/HyperbolicMixer.h
         src/drawingMethods/DisperityLoop.cpp
         include/drawingMethods/DisparityLoop.h
+        src/WindowParams.cpp
+        include/WindowParams.h
 )
 
 find_package(raylib CONFIG REQUIRED)

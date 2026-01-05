@@ -2,6 +2,8 @@
 #include "../include/sortingMethods/BubbleSort.h"
 #include <random>
 
+#include "../include/WindowParams.h"
+
 SortingVisualizer::SortingVisualizer(const std::vector<int> &arr)
 	: sortingMethod(nullptr),
 	  drawingMethod(nullptr),
@@ -14,6 +16,7 @@ void SortingVisualizer::setSortingMethod(SortingMethod *sorting_method) {
 }
 
 void SortingVisualizer::setDrawingMethod(DrawingMethod *drawing_method) {
+	delete this->drawingMethod;
 	this->drawingMethod = drawing_method;
 }
 
@@ -46,7 +49,7 @@ void SortingVisualizer::translateSpeed(const int translation) {
 	setSpeed(speed + translation);
 }
 
-void SortingVisualizer::draw(const raylib::Window &window) const {
+void SortingVisualizer::draw(const WindowParams &window) const {
 	DrawText(("Speed: " + std::to_string(speed)).c_str(), 10, 40, 25, WHITE);
 	DrawText(("Step: " + std::to_string(0)).c_str(), 10, 70, 25, WHITE);
 	drawingMethod->draw(arr, window);

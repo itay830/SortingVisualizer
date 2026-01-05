@@ -13,13 +13,13 @@
 Simulation::Simulation(const int width, const int height, const std::string &title)
 	: window(width, height, title) {
 	window.SetIcon(raylib::Image("../resources/simulationVisualizerIcon.png"));
-	window.SetTargetFPS(1500);
+	window.SetTargetFPS(60);
 
 	InitAudioDevice();
 	SetMasterVolume(1.f);
 
 	std::vector<int> arr{};
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 2000; i++) {
 		arr.push_back(i);
 	}
 
@@ -44,7 +44,12 @@ void Simulation::onInput() {
 	if (IsKeyPressed(KEY_R)) {
 		visualizer.shuffle();
 	}
-
+	if (IsKeyPressed(KEY_ONE)) {
+		visualizer.setDrawingMethod(new ColumnsDrawingMethod());
+	}
+	if (IsKeyPressed(KEY_TWO)) {
+		visualizer.setDrawingMethod(new DisparityLoop());
+	}
 
 	if (IsKeyPressed(KEY_UP)) {
 		visualizer.nextStep();
@@ -72,7 +77,7 @@ void Simulation::draw() {
 	window.BeginDrawing();
 	window.ClearBackground(BLACK);
 	DrawFPS(10, 10);
-	visualizer.draw(window);
+	visualizer.draw(WindowParams(0,0,window.GetWidth(),window.GetHeight()));
 	window.EndDrawing();
 }
 

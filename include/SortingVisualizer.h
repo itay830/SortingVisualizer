@@ -16,7 +16,7 @@ public:
 
 	void setMixerMethod(MixerMethod *mixer_method);
 
-	void draw(const raylib::Window &window) const;
+	void draw(const WindowParams &window) const;
 
 	void setSpeed(int newSpeed);
 
