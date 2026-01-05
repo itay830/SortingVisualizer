@@ -4,7 +4,7 @@
 
 #include "../include/WindowParams.h"
 
-SortingVisualizer::SortingVisualizer(const std::vector<int> &arr)
+SortingVisualizer::SortingVisualizer(const std::vector<int>& arr)
 	: sortingMethod(nullptr),
 	  drawingMethod(nullptr),
 	  mixerMethod(nullptr),
@@ -50,8 +50,8 @@ void SortingVisualizer::translateSpeed(const int translation) {
 }
 
 void SortingVisualizer::draw(const WindowParams &window) const {
-	DrawText(("Speed: " + std::to_string(speed)).c_str(), 10, 40, 25, WHITE);
-	DrawText(("Step: " + std::to_string(0)).c_str(), 10, 70, 25, WHITE);
+	DrawText(("Speed: " + std::to_string(speed)).c_str(), window.x + 10, window.y + 40, 25, WHITE);
+	DrawText(("Step: " + std::to_string(0)).c_str(), window.x + 10, window.y + 70, 25, WHITE);
 	drawingMethod->draw(arr, window);
 }
 

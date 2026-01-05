@@ -22,7 +22,8 @@ public:
 
 private:
 	raylib::Window window;
-	SortingVisualizer visualizer = SortingVisualizer({});
-
+	SortingVisualizer visualizerColumns = SortingVisualizer({});
+	SortingVisualizer visualizerCircle = SortingVisualizer({});
+	int mode = 0;
 	void mainLoop();
 };

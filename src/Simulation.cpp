@@ -19,15 +19,21 @@ Simulation::Simulation(const int width, const int height, const std::string &tit
 	SetMasterVolume(1.f);
 
 	std::vector<int> arr{};
-	for (int i = 0; i < 2000; i++) {
+	for (int i = 0; i < 4000; i++) {
 		arr.push_back(i);
 	}
 
-	visualizer = SortingVisualizer(arr);
-	visualizer.setSortingMethod(new BubbleSort());
-	visualizer.setDrawingMethod(new ColumnsDrawingMethod());
-	visualizer.setMixerMethod(new HyperbolicMixer());
-	visualizer.setSpeed(300);
+	visualizerColumns = SortingVisualizer(arr);
+	visualizerColumns.setSortingMethod(new BubbleSort());
+	visualizerColumns.setDrawingMethod(new ColumnsDrawingMethod());
+	visualizerColumns.setMixerMethod(new HyperbolicMixer());
+	visualizerColumns.setSpeed(300);
+
+	visualizerCircle = SortingVisualizer(arr);
+	visualizerCircle.setSortingMethod(new BubbleSort());
+	visualizerCircle.setDrawingMethod(new DisparityLoop());
+	visualizerCircle.setMixerMethod(new HyperbolicMixer());
+	visualizerCircle.setSpeed(300);
 }
 
 void Simulation::mainLoop() {
@@ -39,33 +45,44 @@ void Simulation::mainLoop() {
 
 void Simulation::onInput() {
 	if (IsKeyDown(KEY_SPACE)) {
-		visualizer.nextSteps();
+		visualizerColumns.nextSteps();
+		visualizerCircle.nextSteps();
 	}
 	if (IsKeyPressed(KEY_R)) {
-		visualizer.shuffle();
+		visualizerColumns.shuffle();
+		visualizerCircle.shuffle();
 	}
 	if (IsKeyPressed(KEY_ONE)) {
-		visualizer.setDrawingMethod(new ColumnsDrawingMethod());
+		mode = 1;
 	}
 	if (IsKeyPressed(KEY_TWO)) {
-		visualizer.setDrawingMethod(new DisparityLoop());
+		mode = 2;
+	}
+	if (IsKeyPressed(KEY_THREE)) {
+		mode = 3;
 	}
 
 	if (IsKeyPressed(KEY_UP)) {
-		visualizer.nextStep();
+		visualizerColumns.nextStep();
+		visualizerCircle.nextStep();
 	}
 	if (IsKeyPressed(KEY_S)) {
-		visualizer.sort();
+		visualizerColumns.sort();
+		visualizerCircle.sort();
 	}
 	if (IsKeyDown(KEY_LEFT_SHIFT) && IsKeyPressed(KEY_RIGHT)) {
-		visualizer.translateSpeed(100);
+		visualizerColumns.translateSpeed(100);
+		visualizerCircle.translateSpeed(100);
 	} else if (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT)) {
-		visualizer.increaseSpeed();
+		visualizerColumns.increaseSpeed();
+		visualizerCircle.increaseSpeed();
 	}
 	if (IsKeyDown(KEY_LEFT_SHIFT) && IsKeyPressed(KEY_LEFT)) {
-		visualizer.translateSpeed(-100);
+		visualizerColumns.translateSpeed(-100);
+		visualizerCircle.translateSpeed(-100);
 	} else if (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT)) {
-		visualizer.decreaseSpeed();
+		visualizerColumns.decreaseSpeed();
+		visualizerCircle.decreaseSpeed();
 	}
 	if (IsKeyPressed(KEY_F11)) {
 		// TODO: FIX
@@ -77,7 +94,25 @@ void Simulation::draw() {
 	window.BeginDrawing();
 	window.ClearBackground(BLACK);
 	DrawFPS(10, 10);
-	visualizer.draw(WindowParams(0,0,window.GetWidth(),window.GetHeight()));
+	switch (mode) {
+		case 1:
+			visualizerColumns.draw(
+				WindowParams(0, 0, window.GetWidth(), window.GetHeight()));
+			break;
+		case 2:
+			visualizerCircle.draw(
+				WindowParams(0, 0, window.GetWidth(), window.GetHeight()));
+			break;
+		case 3:
+			visualizerColumns.draw(
+				WindowParams(0, 0, window.GetWidth() / 2, window.GetHeight()));
+			visualizerCircle.draw(
+				WindowParams(window.GetWidth() / 2, 0, window.GetWidth() / 2, window.GetHeight()));
+			break;
+		default:
+			visualizerColumns.draw(
+				WindowParams(0, 0, window.GetWidth(), window.GetHeight()));
+	}
 	window.EndDrawing();
 }
 

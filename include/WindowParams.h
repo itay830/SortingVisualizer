@@ -2,5 +2,5 @@
 
 class WindowParams {
 public:
-	float x, y, w, h;
+	int x, y, w, h;
 };

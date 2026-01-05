@@ -6,7 +6,7 @@
 
 class SortingVisualizer {
 public:
-	explicit SortingVisualizer(const std::vector<int> &arr);
+	explicit SortingVisualizer(const std::vector<int>& arr);
 
 	~SortingVisualizer();
 
